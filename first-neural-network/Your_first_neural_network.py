@@ -133,7 +133,7 @@ val_features, val_targets = features[-60*24:], targets[-60*24:]
 # 
 #   
 
-# In[34]:
+# In[9]:
 
 
 class NeuralNetwork(object):
@@ -234,7 +234,7 @@ class NeuralNetwork(object):
         return final_outputs
 
 
-# In[35]:
+# In[10]:
 
 
 def MSE(y, Y):
@@ -245,7 +245,7 @@ def MSE(y, Y):
 # 
 # 运行这些单元测试，检查你的网络实现是否正确。这样可以帮助你确保网络已正确实现，然后再开始训练网络。这些测试必须成功才能通过此项目。
 
-# In[36]:
+# In[11]:
 
 
 import unittest
@@ -328,16 +328,16 @@ unittest.TextTestRunner().run(suite)
 # 
 # 隐藏节点越多，模型的预测结果就越准确。尝试不同的隐藏节点的数量，看看对性能有何影响。你可以查看损失字典，寻找网络性能指标。如果隐藏单元的数量太少，那么模型就没有足够的空间进行学习，如果太多，则学习方向就有太多的选择。选择隐藏单元数量的技巧在于找到合适的平衡点。
 
-# In[53]:
+# In[12]:
 
 
 import sys
 
 ### TODO:Set the hyperparameters here, you need to change the defalut to get a better solution ###
-iterations = 1000
-learning_rate = 0.12
-hidden_nodes = 5
-output_nodes = 3
+iterations = 5000 # 實際上訓練到 2000 時已經 train_loss 和 val_loss已經到底了, 沒必要至少 5000 epoch 吧
+learning_rate = 0.8
+hidden_nodes = 15
+output_nodes = 1 # 既然有給出output_nodes選項, output_nodes能>1嗎? 爲什麼?
 
 N_i = train_features.shape[1]
 network = NeuralNetwork(N_i, hidden_nodes, output_nodes, learning_rate)
@@ -360,7 +360,7 @@ for ii in range(iterations):
     losses['validation'].append(val_loss)
 
 
-# In[54]:
+# In[15]:
 
 
 plt.plot(losses['train'], label='Training loss')
@@ -373,7 +373,7 @@ _ = plt.ylim()
 # 
 # 使用测试数据看看网络对数据建模的效果如何。如果完全错了，请确保网络中的每步都正确实现。
 
-# In[55]:
+# In[14]:
 
 
 fig, ax = plt.subplots(figsize=(8,4))
